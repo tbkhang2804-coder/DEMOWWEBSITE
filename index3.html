@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="vi" data-lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Khu Phố Du Lịch An Thượng – Travel Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Font đẹp, dễ nhìn -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --bg-soft: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.08);
+      --accent: #f97316;
+      --border: #e5e7eb;
+      --card-radius: 18px;
+      --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-theme="dark"] {
+      --bg: #020617;
+      --bg-soft: #020617;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --accent: #fbbf24;
+      --border: #1f2933;
+      --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #e0edff 0, var(--bg) 45%)
+        fixed;
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body[data-theme="dark"] {
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%) fixed;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 16px 80px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 250, 252, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    body[data-theme="dark"] header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom-color: #1f2937;
+    }
+
+    .top-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: conic-gradient(
+        from 210deg,
+        #2563eb,
+        #22c55e,
+        #f97316,
+        #ec4899,
+        #2563eb
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+    }
+
+    .logo-text-main {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #22c55e);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .btn-small {
+      padding: 4px 8px;
+      font-size: 11px;
+    }
+
+    .lang-toggle.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    main {
+      margin-top: 12px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 24px;
+      align-items: center;
+      margin-top: 16px;
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 11px;
+    }
+
+    .hero h1 {
+      font-size: clamp(24px, 4vw, 34px);
+      margin: 10px 0;
+      line-height: 1.15;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 24px;
+      background: radial-gradient(circle at top, #1d4ed8, #0f172a);
+      color: #e5e7eb;
+      padding: 18px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+      overflow: hidden;
+      min-height: 230px;
+    }
+
+    .hero-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .hero-card h2 {
+      font-size: 18px;
+      margin: 0 0 6px;
+    }
+
+    .hero-card p {
+      font-size: 12px;
+      margin: 0 0 10px;
+      color: #cbd5f5;
+    }
+
+    .hero-taglist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+
+    .hero-tag {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(96, 165, 250, 0.6), transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(14, 165, 233, 0.6), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-map-chip {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      font-size: 10px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        display: none;
+      }
+      .grid, .grid-4 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .page {
+        padding: 12px 12px 80px;
+      }
+    }
+
+    .card {
+      background: rgba(248, 250, 252, 0.96);
+      border-radius: var(--card-radius);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    body[data-theme="dark"] .card {
+      background: radial-gradient(circle at top, #020617, #020617);
+      border-color: #1f2937;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 14px;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .card-text {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    details {
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      padding: 8px 10px;
+      background: rgba(248, 250, 252, 0.9);
+      font-size: 12px;
+    }
+
+    body[data-theme="dark"] details {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--primary-soft);
+      text-align: left;
+    }
+
+    .map-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
+    }
+
+    .map-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 260px;
+      border: 0;
+    }
+
+    .badge-inline {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: inline-block;
+      margin-left: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+      padding-top: 12px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .sources-list {
+      font-size: 11px;
+      padding-left: 16px;
+    }
+
+    /* Ngôn ngữ: ẩn/hiện */
+    .vi { display: inline; }
+    .en { display: none; }
+
+    body[data-lang="en"] .vi { display: none; }
+    body[data-lang="en"] .en { display: inline; }
+
+    /* Chatbot nổi ở góc phải */
+    .chat-toggle-btn {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 60;
+    }
+
+    .chat-panel {
+      position: fixed;
+      right: 16px;
+      bottom: 64px;
+      width: min(360px, 90vw);
+      max-height: 480px;
+      background: var(--bg-soft);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 60;
+    }
+
+    body[data-theme="dark"] .chat-panel {
+      background: #020617;
+    }
+
+    .chat-panel-header {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .chat-panel-header h3 {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .chat-panel-header small {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .chat-messages {
+      padding: 10px 12px;
+      font-size: 12px;
+      overflow-y: auto;
+      flex: 1;
+      background: radial-gradient(circle at top, rgba(148, 163, 184, 0.15), transparent 65%);
+    }
+
+    .chat-message {
+      margin-bottom: 8px;
+      max-width: 90%;
+    }
+
+    .chat-message.user {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .chat-bubble {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 14px;
+    }
+
+    .chat-message.user .chat-bubble {
+      background: var(--primary);
+      color: #fff;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-message.bot .chat-bubble {
+      background: rgba(148, 163, 184, 0.16);
+      border-bottom-left-radius: 2px;
+      color: var(--text);
+    }
+
+    .chat-input-row {
+      display: flex;
+      padding: 8px;
+      border-top: 1px solid var(--border);
+      gap: 6px;
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    body[data-theme="dark"] .chat-input-row {
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .chat-input-row button {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 10px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .chat-tabs {
+      display: inline-flex;
+      gap: 4px;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    .chat-tab {
+      padding: 3px 6px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .chat-tab.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body data-theme="light" data-lang="vi">
+<header>
+  <div class="top-bar">
+    <div class="logo">
+      <div class="logo-icon">A</div>
+      <div>
+        <div class="logo-text-main vi">An Thượng Travel Hub</div>
+        <div class="logo-text-main en">An Thuong Travel Hub</div>
+        <div class="logo-text-sub vi">Khu phố du lịch – Phường Mỹ An, Đà Nẵng</div>
+        <div class="logo-text-sub en">Beach tourist quarter – My An ward, Da Nang</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="themeToggle" class="btn btn-small" type="button">
+        🌞 / 🌙
+      </button>
+      <button class="btn btn-small lang-toggle active" data-lang="vi" type="button">
+        VI
+      </button>
+      <button class="btn btn-small lang-toggle" data-lang="en" type="button">
+        EN
+      </button>
+      <a class="btn btn-small btn-ghost" href="https://www.tourismdanang.vn/gioi-thieu-da-nang/" target="_blank">
+        🌐 tourismdanang.vn
+      </a>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#intro">Giới thiệu</a>
+    <a href="#anthuong-streets">An Thượng 1–9</a>
+    <a href="#main-streets">4 tuyến đường chính</a>
+    <a href="#resorts">Khu nghỉ dưỡng</a>
+    <a href="#entertainment">Khu vui chơi</a>
+    <a href="#food-bars">Ẩm thực & Bar</a>
+    <a href="#shops">Shop quần áo</a>
+    <a href="#checkin">Địa điểm check-in</a>
+    <a href="#festivals">Lễ hội</a>
+    <a href="#beach">Bãi biển gần đó</a>
+    <a href="#map3d">Bản đồ 3D</a>
+    <a href="#booking">Đặt phòng / Giá</a>
+    <a href="#sources">Nguồn</a>
+  </nav>
+</header>
+
+<div class="page">
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="badge">
+          <span>📍</span>
+          <span class="vi">Khu phố du lịch An Thượng --
+         “phố Tây” bên biển Mỹ Khê</span>
+          <span class="en">An Thuong Tourist Quarter – beachside “Western street”</span>
+        </div>
+        <h1>
+          <span class="vi">Khám phá An Thượng: Ăn, chơi, nghỉ dưỡng trong một cú click</span>
+          <span class="en">Explore An Thuong: Eat, play, stay in one click</span>
+        </h1>
+        <p class="hero-sub vi">
+          Khu phố du lịch An Thượng nằm tại phường Mỹ An, quận Ngũ Hành Sơn, được
+          giới hạn bởi 4 tuyến đường Võ Nguyên Giáp – Hoàng Kế Viêm – Châu Thị
+          Vĩnh Tế – Ngô Thì Sĩ, cách biển Mỹ Khê chỉ khoảng 100m (5–7 phút đi bộ),
+          với hơn 140 cơ sở dịch vụ du lịch.&nbsp;
+          <a href="#sources">[Xem nguồn]</a>
+        </p>
+        <p class="hero-sub en">
+          An Thuong Tourist Streets in My An ward (Ngu Hanh Son district) are
+          bounded by Vo Nguyen Giap – Hoang Ke Viem – Chau Thi Vinh Te – Ngo Thi Si
+          streets, only about 100 m from My Khe Beach (5–7 minutes on foot) and
+          host over 140 tourism-related businesses.&nbsp;
+          <a href="#sources">[Sources]</a>
+        </p>
+        <div class="hero-actions">
+          <a href="#anthuong-streets" class="btn btn-primary">
+            <span class="vi">Bắt đầu khám phá khu phố</span>
+            <span class="en">Start exploring streets</span>
+          </a>
+          <a href="#map3d" class="btn">
+            🗺️
+            <span class="vi">Xem bản đồ & đường đi</span>
+            <span class="en">View map & routes</span>
+          </a>
+          <a href="#intro" class="btn btn-ghost">
+            ℹ️
+            <span class="vi">Xem phần giới thiệu chi tiết</span>
+            <span class="en">Read full introduction</span>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span>🕒 24/7</span>
+          <span class="vi">Khu phố đêm, ăn uống, bar, nghỉ dưỡng</span>
+          <span class="en">Nightlife, dining, bars & stays</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-glow"></div>
+        <div class="hero-pill">
+          🌊 <span class="vi">100m tới biển Mỹ Khê</span>
+          <span class="en">100 m to My Khe Beach</span>
+        </div>
+        <h2 class="vi">Bản đồ nhanh khu An Thượng</h2>
+        <h2 class="en">Quick map of An Thuong area</h2>
+        <p class="vi">
+          Khu An Thượng gồm các tuyến An Thượng 1–9, xen giữa là các khách sạn,
+          căn hộ, nhà hàng và quán bar dành cho du khách quốc tế lẫn nội địa.
+        </p>
+        <p class="en">
+          An Thuong area includes An Thuong 1–9 streets filled with hotels,
+          apartments, restaurants and bars for both international and local guests.
+        </p>
+        <div class="hero-taglist">
+          <div class="hero-tag">An Thượng 1–9</div>
+          <div class="hero-tag">Hoàng Kế Viêm</div>
+          <div class="hero-tag">Châu Thị Vĩnh Tế</div>
+          <div class="hero-tag">Ngô Thì Sĩ</div>
+          <div class="hero-tag">Mai Thúc Lân</div>
+        </div>
+        <div class="hero-map-chip">
+          🧭
+          <span class="vi">Phóng xuống bản đồ tương tác ở dưới để xem rõ hơn</span>
+          <span class="en">Scroll down for interactive map</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIỚI THIỆU -->
+    <section id="intro" class="section">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="vi">Giới thiệu chung về Đà Nẵng & An Thượng</span>
+          <span class="en">Overview of Da Nang & An Thuong</span>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title vi">Đà Nẵng – Thành phố biển đáng sống</div>
+          <div class="card-title en">Da Nang – A liveable seaside city</div>
+          <p class="card-text vi">
+            Theo cổng thông tin du lịch chính thức <strong>tourismdanang.vn</strong>,
+            Đà Nẵng là một trong ba trung tâm du lịch lớn của Việt Nam, là cửa ngõ
+            đến các di sản Huế, Mỹ Sơn, Hội An và vườn quốc gia Phong Nha – Kẻ
+            Bàng. Biển Mỹ Khê được tạp chí Forbes bình chọn là một trong những bãi
+            biển quyến rũ nhất hành tinh.&nbsp;
+            <a href="https://www.tourismdanang.vn/gioi-thieu-da-nang/" target="_blank">
+              (Xem bài giới thiệu)
+            </a>
+          </p>
+          <p class="card-text en">
+            According to Da Nang’s official tourism portal, the city is one of the
+            three major tourism hubs in Vietnam and a gateway to UNESCO heritage
+            sites like Hue, My Son and Hoi An. My Khe Beach has been listed by
+            Forbes among the world’s most attractive beaches.&nbsp;
+            <a href="https://www.tourismdanang.vn/gioi-thieu-da-nang/" target="_blank">
+              (Read more)
+            </a>
+          </p>
+          <details>
+            <summary class="vi">Xem thêm tóm tắt</summary>
+            <summary class="en">Show more</summary>
+            <div class="vi">
+              • Đà Nẵng có hệ thống nghỉ dưỡng quốc tế, nhiều bãi biển dài ~60km.<br/>
+              • Gần bán đảo Sơn Trà, Bà Nà Hills, Ngũ Hành Sơn, Cầu Rồng, Cầu Sông Hàn.
+            </div>
+            <div class="en">
+              • Da Nang offers international-standard resorts and ~60 km of beaches.<br/>
+              • Close to Son Tra Peninsula, Ba Na Hills, Marble Mountains, Dragon Bridge & Han River Bridge.
+            </div>
+          </details>
+          <p class="note vi">
+            👉 Đây là trang giới thiệu có cấu trúc tương tự website mẫu:
+            <code>&lt;a href="/about" target="_blank"&gt;</code> – bạn có thể tạo
+            thêm file <code>about.html</code> riêng nếu muốn chia trang.
+          </p>
+          <p class="note en">
+            👉 This section mirrors the sample website – you can create an
+            additional <code>about.html</code> page linked via
+            <code>&lt;a href="/about" target="_blank"&gt;</code>.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title vi">An Thượng – Khu phố đêm bên biển</div>
+          <div class="card-title en">An Thuong – Nightlife by the beach</div>
+          <p class="card-text vi">
+            Khu phố du lịch An Thượng được quy hoạch như “phố đêm” phục vụ khách
+            xuyên suốt ngày và tối, với các tuyến An Thượng 1–9, khu phố đi bộ,
+            chợ đêm, nhà hàng đa dạng từ ẩm thực Việt đến Âu – Á, quán bar, spa,
+            minimart, căn hộ dịch vụ…&nbsp;
+            <a href="https://danangfantasticity.com/tin-tuc/khu-pho-du-lich-an-thuong-bat-dau-di-vao-hoat-dong-tu-23042018" target="_blank">
+              (Thông tin mở khu phố)
+            </a>
+          </p>
+          <p class="card-text en">
+            An Thuong Tourist Streets were designed as a seaside nightlife quarter
+            with An Thuong 1–9 streets, walking streets, night market, restaurants,
+            bars, spas, minimarts and serviced apartments.&nbsp;
+            <a href="https://danangfantasticity.com/en/night-market/an-thuong-night-market" target="_blank">
+              (An Thuong Night Market)
+            </a>
+          </p>
+          <details>
+            <summary class="vi">Hotline & hỗ trợ thông tin</summary>
+            <summary class="en">Hotline & information support</summary>
+            <div class="vi">
+              Để được hỗ trợ đặt tour, hỏi thêm thông tin du lịch Đà Nẵng, bạn có
+              thể liên hệ theo thông tin từ tourismdanang.vn:<br/>
+              • Điện thoại: 0243 202 1982<br/>
+              • Email: info@tourismdanang.vn<br/>
+              (Đây là hotline du lịch chung, không phải của từng nhà hàng cụ thể.)
+            </div>
+            <div class="en">
+              For official tourist information and tours you can contact Da Nang
+              tourism hotline (tourismdanang.vn):<br/>
+              • Phone: +84 243 202 1982<br/>
+              • Email: info@tourismdanang.vn<br/>
+              (General tourism hotline, not for specific restaurants.)
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- AN THUONG 1–9 -->
+    <section id="anthuong-streets" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Khu phố An Thượng 1–9</div>
+        <div class="section-title en">An Thuong 1–9 Streets</div>
+        <div class="section-subtitle vi">
+          Chia nhóm theo từng tuyến đường, kèm 3 mục chính: Ẩm thực – Quán bar –
+          Khu nghỉ dưỡng (nội dung minh hoạ, bạn có thể thay bằng tên quán thật).
+        </div>
+        <div class="section-subtitle en">
+          Grouped by streets with three key categories: Food – Bars – Stays
+          (examples only, feel free to replace with real venues).
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Chúng ta gom 3 tuyến vào 1 card cho gọn, nhưng mô tả đầy đủ -->
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=An+Thuong+1-3" alt="An Thuong 1-3" />
+          <div class="card-title vi">An Thượng 1–3 – Phố đi bộ & ẩm thực</div>
+          <div class="card-title en">An Thuong 1–3 – Walking & food streets</div>
+          <div class="chip-row">
+            <div class="chip">Ẩm thực</div>
+            <div class="chip">Bar</div>
+            <div class="chip">Homestay</div>
+          </div>
+          <p class="card-text vi">
+            Khu lõi An Thượng (1–4) được quy hoạch là tuyến phố đi bộ với nhiều
+            nhà hàng Âu – Á, quán cà phê, bar nhỏ, hostel và căn hộ dịch vụ.
+          </p>
+          <p class="card-text en">
+            The core An Thuong 1–4 area forms the main walking streets with
+            European & Asian restaurants, cafés, small bars, hostels and
+            serviced apartments.
+          </p>
+          <details>
+            <summary class="vi">Xem chi tiết Ẩm thực – Bar – Nghỉ dưỡng</summary>
+            <summary class="en">View details: Food – Bar – Stay</summary>
+            <div class="vi">
+              <strong>Ẩm thực (ví dụ minh hoạ):</strong><br/>
+              • Nhà hàng Hải Sản Biển Xanh – hải sản tươi, món Việt.<br/>
+              • Quán Ăn Phố Tây – burger, pasta, món chay.<br/><br/>
+              <strong>Bar / Pub:</strong><br/>
+              • Sky Corner Bar – cocktail, nhạc DJ nhẹ.<br/>
+              • An Thuong Craft Beer – bia thủ công, snack.<br/><br/>
+              <strong>Homestay / Căn hộ:</strong><br/>
+              • An Thuong Garden Homestay – phòng đôi, gần biển.<br/>
+              • Beach Walk Apartment – căn hộ 1–2 phòng ngủ.<br/><br/>
+              📞 Số điện thoại & đặt bàn: bạn nên cập nhật số hotline từng cơ sở
+              sau khi khảo sát thực tế hoặc lấy từ Google Maps / fanpage.<br/>
+              👉 Hiện tại code sử dụng nội dung minh hoạ, tránh ghi nhầm thông tin.
+            </div>
+            <div class="en">
+              <strong>Food (sample only):</strong><br/>
+              • “Bien Xanh” seafood restaurant – fresh Vietnamese dishes.<br/>
+              • “West Street Diner” – burgers, pasta, vegetarian options.<br/><br/>
+              <strong>Bars / Pubs:</strong><br/>
+              • “Sky Corner Bar” – cocktails & light DJ music.<br/>
+              • “An Thuong Craft Beer” – local craft beers & snacks.<br/><br/>
+              <strong>Homestays / Apartments:</strong><br/>
+              • “An Thuong Garden Homestay” – double rooms near the beach.<br/>
+              • “Beach Walk Apartment” – 1–2 bedroom units.<br/><br/>
+              📞 Please update phone numbers & booking info using real data from
+              Google Maps or official pages.<br/>
+              👉 Current entries are placeholders to avoid incorrect real data.
+            </div>
+          </details>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=An+Thuong+4-6" alt="An Thuong 4-6" />
+          <div class="card-title vi">An Thượng 4–6 – Căn hộ & quán cà phê</div>
+          <div class="card-title en">An Thuong 4–6 – Apartments & cafés</div>
+          <div class="chip-row">
+            <div class="chip">Căn hộ dịch vụ</div>
+            <div class="chip">Cà phê</div>
+            <div class="chip">Ăn sáng</div>
+          </div>
+          <p class="card-text vi">
+            Nhiều căn hộ dịch vụ, quán cà phê làm việc, tiệm bánh, phù hợp digital
+            nomad và khách ở dài ngày.
+          </p>
+          <p class="card-text en">
+            Many serviced apartments, work-friendly cafés and bakeries – ideal for
+            digital nomads and long-stay guests.
+          </p>
+          <details>
+            <summary class="vi">Xem chi tiết gợi ý</summary>
+            <summary class="en">View sample details</summary>
+            <div class="vi">
+              • Coffee & Workspace: quán cà phê có wifi mạnh, ổ điện đầy đủ.<br/>
+              • Breakfast Spot: phục vụ bánh mì, brunch, cà phê rang xay.<br/>
+              • Serviced Apartment: căn hộ đầy đủ bếp, máy giặt, phù hợp gia đình.
+            </div>
+            <div class="en">
+              • Coffee & Workspace: strong Wi-Fi and plenty of plugs.<br/>
+              • Breakfast Spot: Vietnamese baguettes, brunch dishes, espresso bar.<br/>
+              • Serviced Apartment: full kitchen and laundry, family friendly.
+            </div>
+          </details>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=An+Thuong+7-9" alt="An Thuong 7-9" />
+          <div class="card-title vi">An Thượng 7–9 – Yên tĩnh hơn, gần dân cư</div>
+          <div class="card-title en">An Thuong 7–9 – Quieter residential edge</div>
+          <div class="chip-row">
+            <div class="chip">Nhà khách</div>
+            <div class="chip">Quán ăn địa phương</div>
+            <div class="chip">Tiệm tiện lợi</div>
+          </div>
+          <p class="card-text vi">
+            Các tuyến gần khu dân cư, nhiều quán ăn địa phương, nhà khách nhỏ,
+            tiện mua đồ tại các cửa hàng tạp hóa, minimart.
+          </p>
+          <p class="card-text en">
+            Streets near local neighborhoods, with local eateries, small guest
+            houses and convenience stores.
+          </p>
+          <details>
+            <summary class="vi">Gợi ý trải nghiệm</summary>
+            <summary class="en">Suggested experiences</summary>
+            <div class="vi">
+              • Thử các quán cơm bình dân, mì Quảng, bún bò.<br/>
+              • Chọn nhà khách yên tĩnh nếu bạn thích không gian địa phương hơn
+              là khu bar náo nhiệt.
+            </div>
+            <div class="en">
+              • Try local rice eateries, Mi Quang and Bun Bo.<br/>
+              • Pick a quiet guest house if you prefer local vibes over bar areas.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 TUYẾN ĐƯỜNG CHÍNH -->
+    <section id="main-streets" class="section">
+      <div class="section-header">
+        <div class="section-title vi">4 tuyến đường chính bao quanh khu An Thượng</div>
+        <div class="section-title en">4 main streets around An Thuong</div>
+        <div class="section-subtitle vi">
+          Theo các quyết định quy hoạch, khu phố du lịch An Thượng được giới hạn
+          bởi 4 tuyến đường: <strong>Võ Nguyên Giáp – Hoàng Kế Viêm – Châu Thị Vĩnh Tế – Ngô Thì Sĩ</strong>. Mai Thúc Lân là tuyến nối quan trọng với khu dân cư và các dịch vụ bổ trợ.
+        </div>
+        <div class="section-subtitle en">
+          The An Thuong tourist quarter is bounded by Vo Nguyen Giap, Hoang Ke
+          Viem, Chau Thi Vinh Te and Ngo Thi Si streets; Mai Thuc Lan is a key
+          connector to nearby residential and service areas.
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Hoàng Kế Viêm -->
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Hoang+Ke+Viem" alt="Hoang Ke Viem Street" />
+          <div class="card-title vi">Đường Hoàng Kế Viêm – Trục chính vào khu phố</div>
+          <div class="card-title en">Hoang Ke Viem – Main access street</div>
+          <p class="card-text vi">
+            Là một trong 4 tuyến giới hạn khu phố du lịch An Thượng, kết nối từ
+            Võ Nguyên Giáp (ven biển) vào khu phố Tây, tập trung nhiều nhà hàng,
+            quán cà phê, khách sạn và thường được chọn làm nơi tổ chức gian hàng,
+            sự kiện quảng bá sản phẩm OCOP. 
+          </p>
+          <p class="card-text en">
+            One of the four boundary streets of An Thuong, linking the beachfront
+            Vo Nguyen Giap to the tourist quarter. It concentrates many restaurants,
+            cafés and hotels and hosts OCOP promotion stalls and events.
+          </p>
+          <details>
+            <summary class="vi">Gợi ý quán ăn & địa điểm nổi bật</summary>
+            <summary class="en">Highlights & sample venues</summary>
+            <div class="vi">
+              • Dãy nhà hàng chuyên hải sản, BBQ và món Việt.<br/>
+              • Nhiều khách sạn 3–4* nằm trên trục đường này, chỉ vài phút đi bộ
+              ra biển Mỹ Khê.<br/>
+              • Thỉnh thoảng có các gian hàng quảng bá sản phẩm địa phương (OCOP). 
+            </div>
+            <div class="en">
+              • Rows of seafood and BBQ restaurants.<br/>
+              • Several 3–4* hotels only a short walk from My Khe Beach.<br/>
+              • Occasional OCOP product promotion fair along the street.
+            </div>
+          </details>
+        </div>
+
+        <!-- Châu Thị Vĩnh Tế -->
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Chau+Thi+Vinh+Te" alt="Chau Thi Vinh Te Street" />
+          <div class="card-title vi">Châu Thị Vĩnh Tế – “Thiên đường ẩm thực”</div>
+          <div class="card-title en">Chau Thi Vinh Te – “Foodie street”</div>
+          <p class="card-text vi">
+            Nhiều bài viết du lịch gọi đây là một trong những con đường nhộn nhịp
+            và dày đặc quán ăn nhất Đà Nẵng: hải sản, lẩu nướng, cơm gà, mì Quảng,
+            bún bò, bánh xèo, đồ ăn vặt… 
+          </p>
+          <p class="card-text en">
+            Travel blogs often describe this street as an extremely dense food
+            corridor packed with seafood, hotpot & grill, rice dishes, Mi Quang,
+            Bun Bo, Banh Xeo and snacks.
+          </p>
+          <details>
+            <summary class="vi">Nên thử gì?</summary>
+            <summary class="en">What to try?</summary>
+            <div class="vi">
+              • Hải sản – Ốc các kiểu.<br/>
+              • Bánh xèo, nem lụi, bún thịt nướng.<br/>
+              • Mì quảng, bún mắm, cơm gà, cơm tấm.<br/>
+              👉 Bạn có thể tra thêm “quán ăn đường Châu Thị Vĩnh Tế” để lấy tên
+              quán và địa chỉ cụ thể, sau đó chỉnh lại trong code.
+            </div>
+            <div class="en">
+              • Seafood and snail dishes.<br/>
+              • Banh Xeo, Nem Lui, grilled pork dishes.<br/>
+              • Mi Quang, fish sauce noodle, chicken rice, broken rice.<br/>
+              👉 Search “Chau Thi Vinh Te food street” to update exact venues in the code.
+            </div>
+          </details>
+        </div>
+
+        <!-- Ngô Thì Sĩ & Mai Thúc Lân -->
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Ngo+Thi+Si+%26+Mai+Thuc+Lan" alt="Ngo Thi Si and Mai Thuc Lan" />
+          <div class="card-title vi">Ngô Thì Sĩ & Mai Thúc Lân – Gần biển & khu dân cư</div>
+          <div class="card-title en">Ngo Thi Si & Mai Thuc Lan – Near the beach</div>
+          <p class="card-text vi">
+            Đường Ngô Thì Sĩ nằm trong khu phố du lịch An Thượng, cách biển Mỹ
+            Khê khoảng 200m, giao với Trần Bạch Đằng, Lê Quang Đạo, Mai Thúc Lân
+            và tập trung nhiều khách sạn, nhà hàng, quán cà phê. Mai Thúc Lân nối
+            khu dân cư với khu biển, có nhiều dịch vụ như tour, thuê xe, văn
+            phòng du lịch.
+          </p>
+          <p class="card-text en">
+            Ngo Thi Si Street sits in the An Thuong area about 200 m from My Khe
+            Beach, intersecting Tran Bach Dang, Le Quang Dao and Mai Thuc Lan,
+            with plenty of hotels, restaurants and cafés. Mai Thuc Lan connects
+            local neighborhoods to the beach area with travel agencies and rentals.
+          </p>
+          <details>
+            <summary class="vi">Gợi ý</summary>
+            <summary class="en">Suggestions</summary>
+            <div class="vi">
+              • Chọn khách sạn trên Ngô Thì Sĩ nếu muốn đi bộ ra biển nhanh.<br/>
+              • Dùng dịch vụ tour/thuê xe trên Mai Thúc Lân để khám phá Bà Nà,
+              Hội An, Ngũ Hành Sơn.
+            </div>
+            <div class="en">
+              • Stay on Ngo Thi Si for quick beach access.<br/>
+              • Book tours or vehicle rentals on Mai Thuc Lan for Ba Na, Hoi An,
+              Marble Mountains.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- KHU NGHỈ DƯỠNG -->
+    <section id="resorts" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Khu nghỉ dưỡng & khách sạn gần An Thượng</div>
+        <div class="section-title en">Resort & hotels near An Thuong</div>
+        <div class="section-subtitle vi">
+          Một số resort/khách sạn ven biển thường được nhắc đến trong khu vực Đà Nẵng – Mỹ Khê
+          (tên trong code chỉ mang tính minh hoạ, bạn nên dùng đúng tên nơi bạn hợp tác).
+        </div>
+        <div class="section-subtitle en">
+          Sample names of seaside resorts/hotels around Da Nang – My Khe area
+          (replace with exact partners you work with).
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Beach+Resort" alt="Beach resort" />
+          <div class="card-title">Beachline Resort & Spa (ví dụ)</div>
+          <p class="card-text vi">
+            Resort 4–5* sát biển, có hồ bơi vô cực, spa, nhà hàng Âu – Á, cách khu
+            An Thượng vài phút taxi. Phù hợp khách muốn không gian yên tĩnh nhưng
+            vẫn gần khu phố đêm.
+          </p>
+          <p class="card-text en">
+            4–5* beachfront resort with infinity pool, spa and restaurants, just a
+            short taxi ride from An Thuong – ideal for guests who want quiet but
+            still close to the nightlife.
+          </p>
+          <p class="card-text vi">
+            Website: <a href="https://danangfantasticity.com" target="_blank">danangfantasticity.com</a>
+          </p>
+          <p class="card-text en">
+            Website: <a href="https://danangfantasticity.com" target="_blank">danangfantasticity.com</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=City+Hotel" alt="City hotel" />
+          <div class="card-title">City View Hotel An Thượng (ví dụ)</div>
+          <p class="card-text vi">
+            Khách sạn 3–4* nằm trên trục Hoàng Kế Viêm hoặc Ngô Thì Sĩ, có phòng
+            view biển/ phố, phù hợp khách công tác, gia đình.
+          </p>
+          <p class="card-text en">
+            3–4* hotel on Hoang Ke Viem or Ngo Thi Si with city/sea-view rooms,
+            suitable for business travellers and families.
+          </p>
+          <p class="card-text">
+            Social: 
+            <a href="https://www.facebook.com/visitdanang./" target="_blank">Facebook Du lịch Đà Nẵng</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Apartment+Hotel" alt="Apartment hotel" />
+          <div class="card-title">An Thuong Apartment Hotel (ví dụ)</div>
+          <p class="card-text vi">
+            Căn hộ khách sạn ngay trong các tuyến An Thượng 1–9, có bếp, máy
+            giặt, thích hợp khách ở dài ngày hoặc nhóm bạn.
+          </p>
+          <p class="card-text en">
+            Apartment–style hotel within An Thuong 1–9 streets with kitchen and
+            washer, perfect for long-stay guests and groups.
+          </p>
+          <p class="card-text">
+            Link tham khảo:
+            <a href="https://www.vietnamdrive.com/en/an-thuong/" target="_blank">Bài viết về An Thượng – Vietnamdrive</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KHU VUI CHƠI -->
+    <section id="entertainment" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Khu vui chơi & giải trí</div>
+        <div class="section-title en">Entertainment & fun</div>
+        <div class="section-subtitle vi">
+          Khu phố An Thượng được định hướng là không gian kinh tế đêm với các hoạt
+          động ẩm thực, mua sắm, chợ đêm, biểu diễn đường phố. 
+        </div>
+        <div class="section-subtitle en">
+          An Thuong is designed as a night-time economy zone with food, shopping,
+          night market and street performances.
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Night+Market" alt="An Thuong Night Market" />
+          <div class="card-title vi">Chợ đêm An Thượng & phố đi bộ</div>
+          <div class="card-title en">An Thuong Night Market & walking zone</div>
+          <p class="card-text vi">
+            Chợ đêm An Thượng cung cấp gian hàng ẩm thực, quà lưu niệm, quần áo,
+            phụ kiện, kết hợp cùng khu phố đi bộ tạo thành sản phẩm du lịch đáp
+            ứng nhu cầu ăn uống, mua sắm ban đêm của du khách.
+          </p>
+          <p class="card-text en">
+            An Thuong Night Market offers food, souvenirs, clothing and accessories
+            stalls, combined with the walking zone to create a complete night
+            experience for tourists.
+          </p>
+          <p class="card-text">
+            Website:
+            <a href="https://danangfantasticity.com/en/night-market/an-thuong-night-market" target="_blank">
+              An Thuong Night Market – Danang Fantasticity
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Beach+Activities" alt="Beach activities" />
+          <div class="card-title vi">Hoạt động bãi biển & club ven biển</div>
+          <div class="card-title en">Beach activities & clubs</div>
+          <p class="card-text vi">
+            Bãi biển gần An Thượng (Mỹ Khê – Bắc Mỹ An) có các hoạt động như tắm
+            biển, dù kéo, moto nước, chèo sup, bar club ven biển. 
+          </p>
+          <p class="card-text en">
+            Nearby beaches (My Khe – Bac My An) offer swimming, parasailing, jet
+            ski, SUP, and beachfront bars & clubs.
+          </p>
+          <p class="card-text">
+            Tham khảo:
+            <a href="https://evivatour.com/my-khe-beach-in-danang-vietnam/" target="_blank">My Khe Beach guide</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ẨM THỰC & BAR -->
+    <section id="food-bars" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Ẩm thực & quán bar quanh An Thượng</div>
+        <div class="section-title en">Food & bars around An Thuong</div>
+        <div class="section-subtitle vi">
+          Dưới đây là <strong>bảng tham khảo giá</strong> dạng 1xx.000 – 2xx.000 và
+          gợi ý loại hình, không phải bảng giá chính thức. Bạn nên cập nhật theo
+          từng nhà hàng cụ thể.
+        </div>
+        <div class="section-subtitle en">
+          Table below shows <strong>sample price ranges</strong> only; please
+          update with actual prices from restaurants.
+        </div>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th class="vi">Loại hình</th>
+              <th class="en">Category</th>
+              <th class="vi">Khẩu vị chính</th>
+              <th class="en">Main cuisine</th>
+              <th class="vi">Khoảng giá / người</th>
+              <th class="en">Price range / person</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nhà hàng hải sản</td>
+              <td>Seafood restaurant</td>
+              <td class="vi">Hải sản Việt, lẩu nướng</td>
+              <td class="en">Vietnamese seafood, hotpot & grill</td>
+              <td>1xx.000 – 3xx.000 VND</td>
+            </tr>
+            <tr>
+              <td>Nhà hàng Âu – Á</td>
+              <td>Asian & Western dining</td>
+              <td class="vi">Món Âu, pizza, pasta, món Thái, Nhật</td>
+              <td class="en">Western, pizza, pasta, Thai, Japanese</td>
+              <td>1xx.000 – 2xx.000 VND</td>
+            </tr>
+            <tr>
+              <td>Quán bar / pub</td>
+              <td>Bars & pubs</td>
+              <td class="vi">Cocktail, beer, snack</td>
+              <td class="en">Cocktails, beer, snacks</td>
+              <td>1xx.000 – 2xx.000 VND</td>
+            </tr>
+            <tr>
+              <td>Quán ăn địa phương</td>
+              <td>Local eateries</td>
+              <td class="vi">Mì quảng, bún mắm, bánh xèo, cơm gà</td>
+              <td class="en">Mi Quang, fish sauce noodles, Banh Xeo, chicken rice</td>
+              <td>5x.000 – 1xx.000 VND</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note vi">
+          👉 Giá chỉ là gợi ý ước lượng theo mặt bằng chung Đà Nẵng, không phải báo giá
+          chính thức. Hãy cập nhật lại nếu bạn dùng website này cho mục đích kinh
+          doanh thật.
+        </p>
+        <p class="note en">
+          👉 Ranges are rough estimates for Da Nang area, not official. Please
+          update if you use this website for real business.
+        </p>
+      </div>
+    </section>
+
+    <!-- SHOP QUẦN ÁO -->
+    <section id="shops" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Shop quần áo & mua sắm</div>
+        <div class="section-title en">Clothing shops & shopping</div>
+        <div class="section-subtitle vi">
+          Khu An Thượng có nhiều boutique nhỏ, thêm vào đó là các shop thời trang
+          lớn trong nội đô Đà Nẵng – bạn có thể giới thiệu như gợi ý bên dưới.
+        </div>
+        <div class="section-subtitle en">
+          An Thuong offers small boutiques; big fashion chains are located in
+          downtown Da Nang – you can present them as below.
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Boutique" alt="Boutique shop" />
+          <div class="card-title vi">Boutique An Thượng (ví dụ)</div>
+          <div class="card-title en">An Thuong Boutique (sample)</div>
+          <p class="card-text vi">
+            Các shop nhỏ bán đồ đi biển, váy maxi, áo sơ mi, phụ kiện mũ, kính,
+            dép kẹp… thuận tiện cho du khách mua sắm trước khi ra biển.
+          </p>
+          <p class="card-text en">
+            Small shops with beachwear, maxi dresses, shirts, hats, sunglasses and
+            flip-flops – convenient for beach-goers.
+          </p>
+          <p class="card-text">
+            Tham khảo bài viết chung:
+            <a href="https://impresstravel.com/an-thuong-street-is-tourist-road-for-danang-shop-tours/" target="_blank">
+              An Thuong Street – tourist road for Danang shop tours
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Fashion+Shop" alt="Fashion shops" />
+          <div class="card-title vi">Shop thời trang nội đô Đà Nẵng</div>
+          <div class="card-title en">Fashion shops in downtown Da Nang</div>
+          <p class="card-text vi">
+            Trong nội thành Đà Nẵng có nhiều shop thời trang nổi tiếng, bạn có
+            thể gợi ý cho khách kết hợp tham quan city tour và shopping.
+          </p>
+          <p class="card-text en">
+            Downtown Da Nang hosts many popular fashion stores; you can suggest
+            combining city tour with shopping time.
+          </p>
+          <p class="card-text">
+            Tham khảo:
+            <a href="https://sakurafashion.vn/top-10-shop-thoi-trang-dep-gia-re-noi-tieng-nhat-tai-da-nang-3551.html" target="_blank">
+              Danh sách shop thời trang – Sakurafashion
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Night+Market+Shopping" alt="Night market shopping" />
+          <div class="card-title vi">Mua sắm tại chợ đêm</div>
+          <div class="card-title en">Night market shopping</div>
+          <p class="card-text vi">
+            Chợ đêm An Thượng cũng có các gian hàng quần áo, túi xách, phụ kiện,
+            đồ lưu niệm – giá hợp lý, thích hợp mua quà tặng.
+          </p>
+          <p class="card-text en">
+            An Thuong Night Market also sells clothing, bags, accessories and
+            souvenirs at friendly prices – perfect for gifts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECK-IN -->
+    <section id="checkin" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Địa điểm check-in</div>
+        <div class="section-title en">Check-in spots</div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=An+Thuong+Sign" alt="An Thuong sign" />
+          <div class="card-title vi">Cổng “Khu phố du lịch An Thượng”</div>
+          <div class="card-title en">“An Thuong Tourist Streets” sign</div>
+          <p class="card-text vi">
+            Tại lối vào khu phố có biển “Khu phố du lịch An Thượng / Tourist
+            streets” – nơi nhiều du khách dừng lại chụp hình check-in.
+          </p>
+          <p class="card-text en">
+            At the entrance stands the “An Thuong Tourist Streets” sign – a
+            classic photo spot for visitors.
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=My+Khe+Beach" alt="My Khe beach" />
+          <div class="card-title vi">Bãi biển Mỹ Khê & Bắc Mỹ An</div>
+          <div class="card-title en">My Khe & Bac My An beaches</div>
+          <p class="card-text vi">
+            Bãi cát trắng, hàng dừa và các lối xuống biển được trang trí đẹp mắt
+            là background lý tưởng cho ảnh bình minh và hoàng hôn.
+          </p>
+          <p class="card-text en">
+            White sand, palm trees and scenic beach access points are perfect
+            backdrops for sunrise and sunset photos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LỄ HỘI -->
+    <section id="festivals" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Lễ hội & sự kiện quanh An Thượng</div>
+        <div class="section-title en">Festivals & events around An Thuong</div>
+        <div class="section-subtitle vi">
+          Lịch sự kiện thay đổi hàng năm, nhưng có một số chương trình lớn thường
+          xuyên diễn ra tại Đà Nẵng và khu vực bãi biển gần An Thượng.
+        </div>
+        <div class="section-subtitle en">
+          Schedules change yearly but some major events regularly take place in Da
+          Nang and beaches near An Thuong.
+        </div>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th class="vi">Tên sự kiện</th>
+              <th class="en">Event</th>
+              <th class="vi">Thời gian (dự kiến)</th>
+              <th class="en">Time (typical)</th>
+              <th class="vi">Địa điểm</th>
+              <th class="en">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lễ hội pháo hoa quốc tế Đà Nẵng (DIFF)</td>
+              <td>Danang International Fireworks Festival</td>
+              <td class="vi">Cuối tháng 5 – giữa tháng 7 (nhiều đêm)</td>
+              <td class="en">Late May – mid July (multiple nights)</td>
+              <td>Sông Hàn – trung tâm Đà Nẵng</td>
+              <td>Han River – downtown Da Nang</td>
+            </tr>
+            <tr>
+              <td>Chương trình mùa du lịch biển</td>
+              <td>Beach tourism season programs</td>
+              <td class="vi">Mùa hè hằng năm</td>
+              <td class="en">Every summer</td>
+              <td>Bãi biển Mỹ An / Mỹ Khê, gần An Thượng</td>
+              <td>My An / My Khe beaches near An Thuong</td>
+            </tr>
+            <tr>
+              <td>Sự kiện, gian hàng OCOP tại Hoàng Kế Viêm</td>
+              <td>OCOP promotion on Hoang Ke Viem street</td>
+              <td class="vi">Theo kế hoạch từng đợt</td>
+              <td class="en">Occasionally during campaigns</td>
+              <td>Đoạn Hoàng Kế Viêm – Võ Nguyên Giáp</td>
+              <td>Hoang Ke Viem – Vo Nguyen Giap segment</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note vi">
+          👉 Lịch cụ thể từng năm, bạn xem danh mục sự kiện trên
+          <a href="https://danangfantasticity.com" target="_blank">danangfantasticity.com</a>
+          hoặc
+          <a href="https://diff.vn/en/" target="_blank">diff.vn</a>
+          rồi cập nhật lại.
+        </p>
+        <p class="note en">
+          👉 For exact dates each year, check
+          <a href="https://danangfantasticity.com" target="_blank">danangfantasticity.com</a>
+          and
+          <a href="https://diff.vn/en/" target="_blank">diff.vn</a>
+          and update the table.
+        </p>
+      </div>
+    </section>
+
+    <!-- BÃI BIỂN -->
+    <section id="beach" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Bãi biển gần khu An Thượng</div>
+        <div class="section-title en">Beaches near An Thuong</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=My+Khe+Beach" alt="My Khe beach view" />
+          <div class="card-title vi">Biển Mỹ Khê – bãi biển nổi tiếng thế giới</div>
+          <div class="card-title en">My Khe Beach – world–famous beach</div>
+          <p class="card-text vi">
+            Mỹ Khê được tạp chí Forbes đánh giá là một trong những bãi biển quyến
+            rũ nhất hành tinh. Từ An Thượng đi bộ 5–7 phút là chạm cát trắng, nước
+            trong và hàng dừa đẹp mắt.
+          </p>
+          <p class="card-text en">
+            My Khe has been listed by Forbes among the world’s most attractive
+            beaches. From An Thuong it takes only 5–7 minutes on foot to reach the
+            soft white sand and clear waters.
+          </p>
+          <p class="card-text">
+            Tham khảo:
+            <a href="https://danangprivatecar.com/my-khe-beach-da-nang/" target="_blank">
+              My Khe Beach – Danangprivatecar
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Bac+My+An+Beach" alt="Bac My An beach" />
+          <div class="card-title vi">Bãi biển Bắc Mỹ An</div>
+          <div class="card-title en">Bac My An Beach</div>
+          <p class="card-text vi">
+            Bãi biển gần các resort cao cấp, nơi tổ chức nhiều hoạt động thuộc
+            mùa du lịch biển. Rất thuận tiện cho khách chọn nghỉ dưỡng tại các
+            khu resort rồi di chuyển xuống An Thượng ban đêm.
+          </p>
+          <p class="card-text en">
+            Beachfront area near upscale resorts where many summer events take
+            place. Guests can easily shuttle between their resorts and An Thuong
+            nightlife.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BẢN ĐỒ 3D -->
+    <section id="map3d" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Bản đồ tương tác (3D) khu An Thượng</div>
+        <div class="section-title en">Interactive “3D” map of An Thuong</div>
+        <div class="section-subtitle vi">
+          Bản đồ nhúng từ Google Maps – bạn có thể xoay, phóng to, chuyển chế độ vệ
+          tinh (3D) để xem rõ bốn tuyến đường chính và khu An Thượng.
+        </div>
+        <div class="section-subtitle en">
+          Embedded Google Maps – rotate, zoom and switch to satellite/3D to see
+          the four main streets and An Thuong area.
+        </div>
+      </div>
+
+      <div class="map-wrapper">
+        <iframe
+          title="An Thuong Area Map"
+          src="https://www.google.com/maps?q=An+Thuong+Da+Nang&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <p class="note vi">
+        🔎 Gợi ý: Vào Google Maps, tìm “Khu phố du lịch An Thượng”, bật chế độ vệ
+        tinh và 3D để xem nhà cao tầng, khách sạn, đường đi chi tiết.
+      </p>
+      <p class="note en">
+        🔎 Tip: On Google Maps, search “An Thuong Da Nang”, enable satellite and
+        3D view to see buildings and streets clearly.
+      </p>
+    </section>
+
+    <!-- ĐẶT PHÒNG / GIÁ -->
+    <section id="booking" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Form tham khảo giá & đặt chỗ</div>
+        <div class="section-title en">Price inquiry & booking form</div>
+      </div>
+
+      <div class="card">
+        <form>
+          <div class="grid-2">
+            <div>
+              <label class="vi">Loại dịch vụ</label>
+              <label class="en">Service type</label><br/>
+              <select style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--border);">
+                <option>Nhà hàng / Restaurant</option>
+                <option>Quán bar / Bar</option>
+                <option>Khách sạn / Hotel</option>
+                <option>Resort</option>
+                <option>Tour / Trải nghiệm</option>
+              </select>
+            </div>
+            <div>
+              <label class="vi">Khu vực ưu tiên</label>
+              <label class="en">Preferred area</label><br/>
+              <select style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--border);">
+                <option>An Thượng 1–3</option>
+                <option>An Thượng 4–6</option>
+                <option>An Thượng 7–9</option>
+                <option>Hoàng Kế Viêm</option>
+                <option>Châu Thị Vĩnh Tế</option>
+                <option>Ngô Thì Sĩ / Mai Thúc Lân</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top:10px;">
+            <div>
+              <label class="vi">Ngày / thời gian dự kiến</label>
+              <label class="en">Expected date/time</label><br/>
+              <input type="date" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--border);" />
+            </div>
+            <div>
+              <label class="vi">Số khách</label>
+              <label class="en">Number of guests</label><br/>
+              <input type="number" min="1" value="2" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--border);" />
+            </div>
+          </div>
+
+          <div style="margin-top:10px;">
+            <label class="vi">Ghi chú thêm (yêu cầu ăn kiêng, view, ngân sách…)</label>
+            <label class="en">Notes (diet, view, budget, etc.)</label><br/>
+            <textarea rows="3" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--border);"></textarea>
+          </div>
+
+          <div style="margin-top:10px;display:flex;gap:10px;align-items:center;">
+            <button type="button" class="btn btn-primary">
+              <span class="vi">Gửi yêu cầu (minh hoạ)</span>
+              <span class="en">Send request (sample)</span>
+            </button>
+            <span class="note vi">
+              Form này là demo phía giao diện – bạn cần gắn vào email / hệ thống
+              đặt chỗ riêng nếu dùng thật.
+            </span>
+            <span class="note en">
+              UI only – connect it to your email/booking backend for real usage.
+            </span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- NGUỒN THAM KHẢO -->
+    <section id="sources" class="section">
+      <div class="section-header">
+        <div class="section-title vi">Nguồn dữ liệu & tham khảo chính thống</div>
+        <div class="section-title en">Official sources & references</div>
+      </div>
+      <div class="card">
+        <ul class="sources-list">
+          <li>
+            <strong>tourismdanang.vn</strong> – Giới thiệu Đà Nẵng, thông tin liên hệ,
+            các điểm du lịch chính.
+          </li>
+          <li>
+            <strong>danangfantasticity.com</strong> – Cổng thông tin du lịch Đà Nẵng:
+            sự kiện, lễ hội, chợ đêm An Thượng, các bài viết về biển Mỹ Khê, Bắc Mỹ An.
+          </li>
+          <li>
+            <strong>Vietnamdrive, Vietnamtourism, các báo Đà Nẵng, VTV</strong> – Thông
+            tin về việc hình thành, mở rộng khu phố du lịch An Thượng và giới hạn 4
+            tuyến đường bao quanh.
+          </li>
+          <li>
+            <strong>Bài viết review ẩm thực, shop, thời trang</strong> – Dùng để hiểu
+            đặc trưng các tuyến đường (đặc biệt là đường Châu Thị Vĩnh Tế – thiên đường
+            ẩm thực) và shopping tại Đà Nẵng.
+          </li>
+        </ul>
+        <p class="note vi">
+          ⚠️ Thông tin về <strong>tên quán, số điện thoại, giá</strong> trong code
+          là ví dụ minh hoạ để bạn dễ tùy biến. Hãy thay bằng dữ liệu thật từ
+          Google Maps, website, fanpage của từng cơ sở khi triển khai chính thức.
+        </p>
+        <p class="note en">
+          ⚠️ Restaurant/bar/shop names, phone numbers and prices in this code are
+          placeholders. Please replace them with real data from Google Maps,
+          official websites or fanpages before using it in production.
+        </p>
+      </div>
+    </section>
+
+    <!-- CHATBOT NỔI -->
+    <button class="btn chat-toggle-btn" id="chatToggle" type="button">
+      💬 Chat An Thượng
+    </button>
+
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-panel-header">
+        <div>
+          <h3 class="vi">Chatbot Khu An Thượng</h3>
+          <h3 class="en">An Thuong Assistant</h3>
+          <small class="vi">Trả lời ngắn gọn, hướng bạn về nội dung chính trên web</small>
+          <small class="en">Short answers that point you to main sections</small>
+          <div class="chat-tabs">
+            <div class="chat-tab active" data-mode="local">An Thượng</div>
+            <div class="chat-tab" data-mode="openai">OpenAI (tùy chọn)</div>
+          </div>
+        </div>
+        <button class="btn btn-small btn-ghost" type="button" id="chatClose">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-row">
+        <input id="chatInput" type="text"
+          placeholder="Hỏi về ăn uống, bar, bản đồ... / Ask about food, bar, map..." />
+        <button id="chatSend" type="button">➤</button>
+      </div>
+      <div class="note">
+        <span class="vi">
+          • Chế độ <strong>An Thượng</strong>: trả lời từ dữ liệu cứng trong web.<br/>
+          • Chế độ <strong>OpenAI</strong>: bạn có thể nối API OpenAI (cần tự dán
+          key, không nên để lộ public).
+        </span>
+        <span class="en">
+          • <strong>An Thuong</strong> mode: rule–based, offline answers.<br/>
+          • <strong>OpenAI</strong> mode: call OpenAI API (you must paste your own
+          key and keep it secret).
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="vi">
+      © 2025 – Landing page mẫu cho Khu Phố Du Lịch An Thượng. Giao diện dành cho
+      mục đích học tập (học sinh cấp 3), bạn có thể chỉnh sửa, bổ sung dữ liệu
+      thật và tích hợp hệ thống đặt chỗ riêng.
+    </div>
+    <div class="en">
+      © 2025 – Sample landing page for An Thuong Tourist Streets, designed for
+      learning purposes. Feel free to extend it with real data and your booking
+      system.
+    </div>
+  </footer>
+</div>
+
+<script>
+  // --- HỆ THỐNG NGÔN NGỮ ---
+  const bodyEl = document.body;
+  const langButtons = document.querySelectorAll('.lang-toggle');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      bodyEl.setAttribute('data-lang', lang);
+      langButtons.forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+
+  // --- CHẾ ĐỘ NGÀY / ĐÊM ---
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    const current = bodyEl.getAttribute('data-theme') || 'light';
+    const next = current === 'light' ? 'dark' : 'light';
+    bodyEl.setAttribute('data-theme', next);
+  });
+
+  // --- CHATBOT ---
+  const chatToggle = document.getElementById('chatToggle');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatClose = document.getElementById('chatClose');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+  const chatSend = document.getElementById('chatSend');
+  const chatTabs = document.querySelectorAll('.chat-tab');
+  let chatMode = 'local'; // 'local' hoặc 'openai'
+
+  chatToggle.addEventListener('click', () => {
+    chatPanel.style.display = 'flex';
+    chatInput.focus();
+  });
+
+  chatClose.addEventListener('click', () => {
+    chatPanel.style.display = 'none';
+  });
+
+  chatTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      chatTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      chatMode = tab.dataset.mode || 'local';
+      addBotMessage(
+        chatMode === 'local'
+          ? 'vi' === bodyEl.getAttribute('data-lang')
+            ? 'Đang dùng chế độ chatbot Khu An Thượng (offline).'
+            : 'Using offline An Thuong bot mode.'
+          : 'vi' === bodyEl.getAttribute('data-lang')
+            ? 'Chế độ OpenAI cần bạn tự cấu hình API key trong mã nguồn.'
+            : 'OpenAI mode requires your own API key in the source code.'
+      );
+    });
+  });
+
+  function addMessage(text, sender = 'bot') {
+    const msg = document.createElement('div');
+    msg.className = 'chat-message ' + sender;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.textContent = text;
+    msg.appendChild(bubble);
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  } 
+
+  function addBotMessage(text) {
+    addMessage(text, 'bot');
+  }
+
+  function localBotAnswer(question) {
+    const q = question.toLowerCase();
+    const lang = bodyEl.getAttribute('data-lang') || 'vi';
+
+    const isVi = lang === 'vi';
+
+    // Một số gợi ý cơ bản, trả lời ngắn gọn và dẫn về section
+    if (q.includes('ăn') || q.includes('food') || q.includes('restaurant')) {
+      return isVi
+        ? 'Bạn có thể xem mục “Ẩm thực & quán bar” và tuyến Châu Thị Vĩnh Tế để chọn quán ăn nhé.'
+        : 'Check the “Food & bars” section and Chau Thi Vinh Te street for places to eat.';
+    }
+    if (q.includes('bar') || q.includes('pub')) {
+      return isVi
+        ? 'Khu bar tập trung nhiều ở An Thượng 1–3 và dọc đường Hoàng Kế Viêm.'
+        : 'Most bars are along An Thuong 1–3 and Hoang Ke Viem street.';
+    }
+    if (q.includes('nghỉ') || q.includes('stay') || q.includes('hotel') || q.includes('resort')) {
+      return isVi
+        ? 'Bạn xem mục “Khu nghỉ dưỡng & khách sạn” và “Form đặt phòng” để tham khảo loại phòng.'
+        : 'See “Resort & hotels” and the booking form section for stay options.';
+    }
+    if (q.includes('bản đồ') || q.includes('map')) {
+      return isVi
+        ? 'Kéo xuống mục “Bản đồ tương tác (3D)” để xem bản đồ Google Maps khu An Thượng.'
+        : 'Scroll to the “Interactive map (3D)” section to view An Thuong on Google Maps.';
+    }
+    if (q.includes('lễ hội') || q.includes('festival') || q.includes('event')) {
+      return isVi
+        ? 'Các lễ hội lớn được tóm tắt ở mục “Lễ hội & sự kiện” ngay dưới phần check-in.'
+        : 'Major events are summarised in “Festivals & events” below the check-in section.';
+    }
+    if (q.includes('biển') || q.includes('beach') || q.includes('swim')) {
+      return isVi
+        ? 'Từ An Thượng bạn đi bộ 5–7 phút tới bãi biển Mỹ Khê / Bắc Mỹ An. Xem chi tiết ở mục “Bãi biển gần đó”.'
+        : 'From An Thuong it is 5–7 minutes on foot to My Khe / Bac My An beaches. See “Nearby beaches”.';
+    }
+    return isVi
+      ? 'Mình là trợ lý Khu An Thượng. Bạn thử xem các mục trong menu (An Thượng 1–9, Ẩm thực, Bản đồ…) để tìm đúng thông tin nhé.'
+      : 'I am the An Thuong assistant. Please use the menu (An Thuong 1–9, Food, Map…) to find detailed information.';
+  }
+
+  async function openAiAnswer(question) {
+    // HƯỚNG DẪN: nếu bạn muốn dùng OpenAI thật,
+    // 1. Gắn API key của bạn vào biến apiKey (không chia sẻ public).
+    // 2. Bật CORS nếu gọi trực tiếp từ frontend, hoặc tốt nhất là gọi qua backend riêng.
+    const apiKey = "YOUR_OPENAI_API_KEY_HERE"; // <-- THAY BẰNG KEY CỦA BẠN, KHÔNG UP LÊN PUBLIC
+    if (!apiKey || apiKey === "YOUR_OPENAI_API_KEY_HERE") {
+      const lang = bodyEl.getAttribute('data-lang') || 'vi';
+      return lang === 'vi'
+        ? 'Bạn chưa cấu hình API key OpenAI. Hãy mở file index.html, tìm hàm openAiAnswer và thay YOUR_OPENAI_API_KEY_HERE bằng key của bạn (không chia sẻ cho ai).'
+        : 'OpenAI API key is not configured. Edit index.html, find openAiAnswer and replace YOUR_OPENAI_API_KEY_HERE with your key (do not share it).';
+    }
+
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + apiKey
+        },
+        body: JSON.stringify({
+          model: "gpt-4.1-mini",
+          messages: [
+            {
+              role: "system",
+              content:
+                "Bạn là trợ lý du lịch cho khu phố du lịch An Thượng (Đà Nẵng). Hãy trả lời NGẮN GỌN (tối đa 3 câu) và luôn hướng người dùng quay lại các mục chính trên website: An Thượng 1–9, Ẩm thực, Bar, Khu nghỉ dưỡng, Bản đồ, Lễ hội."
+            },
+            { role: "user", content: question }
+          ]
+        })
+      });
+      const data = await response.json();
+      const text = data.choices?.[0]?.message?.content?.trim();
+      return text || localBotAnswer(question);
+    } catch (e) {
+      return localBotAnswer(question);
+    }
+  }
+
+  async function handleChatSend() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    chatInput.value = '';
+    let answer;
+    if (chatMode === 'openai') {
+      answer = await openAiAnswer(text);
+    } else {
+      answer = localBotAnswer(text);
+    }
+    addBotMessage(answer);
+  }
+
+  chatSend.addEventListener('click', handleChatSend);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleChatSend();
+    }
+  });
+
+  // Lời chào mặc định
+  addBotMessage('Xin chào! Mình là chatbot Khu An Thượng. Hỏi mình về ăn uống, bar, bản đồ, biển, lễ hội nhé.');
+</script>
+</body>
+</html>
